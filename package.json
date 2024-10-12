@@ -1,0 +1,32 @@
+{
+  "dependencies": {
+    "aoi.js": "^6.8.5",
+    "dotenv": "^16.4.5",
+    "firebase": "^10.13.2",
+    "firebase-admin": "^12.6.0"
+  },
+  "name": "link",
+  "version": "1.0.0",
+  "description": "Link! is a Discord bot that instantly DMs every user in a voice channel with a game invite link.",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/notashleel/link.git"
+  },
+  "keywords": [
+    "link!",
+    "asheyxd",
+    "gamelink",
+    "discord"
+  ],
+  "author": "Aumansh Kaushal (aumanshk@gmail.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/notashleel/link/issues"
+  },
+  "homepage": "https://github.com/notashleel/link#readme"
+}
