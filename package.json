@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@aoijs/aoi.music": "^1.2.4",
     "aoi.js": "^6.8.5",
     "dotenv": "^16.4.5",
     "firebase": "^10.13.2",
@@ -9,7 +10,6 @@
   "version": "1.0.0",
   "description": "Link! is a Discord bot that instantly DMs every user in a voice channel with a game invite link.",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

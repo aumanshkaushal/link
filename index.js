@@ -2,6 +2,7 @@ require('dotenv').config();
 const admin = require('firebase-admin');
 const credentials = require('./secret/key.json');
 const aoijs = require("aoi.js");
+const { AoiVoice, PlayerEvents, PluginName, Cacher, Filter } = require("@aoijs/aoi.music");
 const bot = new aoijs.AoiClient({
   token: process.env.DiscordToken,
   prefix: ["$getVar[prefix]"],
@@ -79,6 +80,17 @@ bot.status({
   status: "online"
 });
 
+const voice = new AoiVoice(bot, {
+  requestOptions: {
+    offsetTimeout: 0,
+    soundcloudLikeTrackLimit: 200,
+  },
+  searchOptions: {
+   youtubeClient: "WEB"
+  }
+});
+
+
 const loader = new aoijs.LoadCommands(bot);
 loader.load(bot.cmd, "./commands/");
 bot.variables(require('./variables.json'));
@@ -90,15 +102,7 @@ admin.initializeApp({
 const db = admin.firestore();
 
 
-
-function recommendGame(no_of_players) {
-  const fs = require('fs')
-  const games = JSON.parse(fs.readFileSync('./base/info.json'))
-  const keys = Object.keys(games)
-  const availableGames = keys.filter(key => games[key].range[0] <= no_of_players && games[key].range[1] >= no_of_players)
-  const randomIndex = Math.floor(Math.random() * availableGames.length)
-  return availableGames[randomIndex]
-}
+const { recommendGame } = require('./functions/recommend/recommendGame')
 
 bot.functionManager.createFunction({
   name: '$recommendGame',
@@ -113,30 +117,17 @@ bot.functionManager.createFunction({
 }  
 });
 
+const { numberOfUsersInVoiceChannel } = require('./functions/recommend/numberOfUsersInVoiceChannel')
+
 bot.functionManager.createFunction({
-  name: '$noUsersInVoiceChannel',
+  name: '$numberOfUsersInVoiceChannel',
   type: 'djs',
   code: async d => {
     const data = d.util.aoiFunc(d);
 
     const [channelID] = data.inside.splits;
 
-    const channel = await d.util.getChannel(d, channelID, true);
-    if (!channel)
-        return d.aoiError.fnError(d, "channel", {inside: data.inside});
-    if (
-        ![d.util.channelTypes.Voice, d.util.channelTypes.Stage].includes(
-            channel.type,
-        )
-    )
-        return d.aoiError.fnError(
-            d,
-            "custom",
-            {inside: data.inside},
-            "Channel Type Is Not Voice/Stage",
-        );
-
-    data.result = channel.members.size;
+    data.result = await numberOfUsersInVoiceChannel(d, channelID);
 
     return {
         code: d.util.setCode(data),
@@ -144,11 +135,7 @@ bot.functionManager.createFunction({
 }  
 });
 
-function getInfo(game_id, field) {
-  const fs = require('fs')
-  const games = JSON.parse(fs.readFileSync('./base/info.json'))
-  return games[game_id][field]
-}
+const { getInfo } = require('./functions/recommend/getInfo')
 
 bot.functionManager.createFunction({
   name: '$getInfo',
@@ -166,14 +153,7 @@ bot.functionManager.createFunction({
 }  
 });
 
-function getRange(game_id) {
-  const fs = require('fs')
-  const games = JSON.parse(fs.readFileSync('./base/info.json'))
-  if (games[game_id].range[0] === games[game_id].range[1]) {
-    return games[game_id].range[0]
-  }
-  return games[game_id].range.join('-')
-}
+const { getRange } = require('./functions/recommend/getRange')
 
 bot.functionManager.createFunction({
   name: '$getRange',
@@ -300,7 +280,7 @@ bot.functionManager.createFunction({
 }  
 });
 
-const { optOut } = require('./functions/opt/optOut')
+const { optOut } = require('./functions/opt/optOut');
 
 bot.functionManager.createFunction({
   name: '$optOut',
