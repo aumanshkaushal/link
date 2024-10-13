@@ -1,4 +1,4 @@
-async function removeTrustedUsers(db, guildId, userId) {
+async function removeTrustedRole(db, guildId, roleId) {
   let guilds = await db.collection('guild').get()
 
   let guild = guilds.docs.find(doc => doc.id === guildId)
@@ -7,13 +7,13 @@ async function removeTrustedUsers(db, guildId, userId) {
   }
   let doc = await db.collection('guild').doc(guildId).get()
   let data = doc.data()
-  let trustedUsers = data.trustedUsers
-  trustedUsers = trustedUsers.filter(user => user !== userId)
+  let trustedRoles = data.trustedRoles
+  trustedRoles = trustedRoles.filter(role => role !== roleId)
   await db.collection('guild').doc(guildId).update({
-    trustedUsers: trustedUsers
+    trustedRoles: trustedRoles
   }) 
 }
 
 module.exports = {
-    removeTrustedUsers
+  removeTrustedRole
 }

@@ -172,17 +172,20 @@ bot.functionManager.createFunction({
 });
 
 
-const { getTrustedUsers } = require('./functions/trustedUser/getTrustedUsers')
+const { getTrustedRoles } = require('./functions/trustedRole/getTrustedRoles')
 
 bot.functionManager.createFunction({
-  name: '$getTrustedUsers',
+  name: '$getTrustedRoles',
   type: 'djs',
   code: async d => {
     const data = d.util.aoiFunc(d);
 
     const [guildId] = data.inside.splits;
 
-    data.result = await getTrustedUsers(db, guildId);
+    let trustedRoles = await getTrustedRoles(db, guildId);
+    trustedRoles = trustedRoles.map(x => `<@&${x}>`);
+
+    data.result = trustedRoles.join(', ')===''? 'None' : trustedRoles.join(', ');
 
     return {
         code: d.util.setCode(data),
@@ -190,17 +193,17 @@ bot.functionManager.createFunction({
 }  
 });
 
-const { addTrustedUsers } = require('./functions/trustedUser/addTrustedUsers')
+const { addTrustedRole } = require('./functions/trustedRole/addTrustedRole')
 
 bot.functionManager.createFunction({
-  name: '$addTrustedUsers',
+  name: '$addTrustedRole',
   type: 'djs',
   code: async d => {
     const data = d.util.aoiFunc(d);
 
-    const [guildId, userId] = data.inside.splits;
+    const [guildId, roleId] = data.inside.splits;
 
-    await addTrustedUsers(db, guildId, userId);
+    await addTrustedRole(db, guildId, roleId);
 
     return {
         code: d.util.setCode(data),
@@ -208,17 +211,17 @@ bot.functionManager.createFunction({
 }  
 });
 
-const { removeTrustedUsers } = require('./functions/trustedUser/removeTrustedUsers')
+const { removeTrustedRole } = require('./functions/trustedRole/removeTrustedRole')
 
 bot.functionManager.createFunction({
-  name: '$removeTrustedUsers',
+  name: '$removeTrustedRole',
   type: 'djs',
   code: async d => {
     const data = d.util.aoiFunc(d);
 
-    const [guildId, userId] = data.inside.splits;
+    const [guildId, roleId] = data.inside.splits;
 
-    await removeTrustedUsers(db, guildId, userId);
+    await removeTrustedRole(db, guildId, roleId);
 
     return {
         code: d.util.setCode(data),
@@ -226,22 +229,58 @@ bot.functionManager.createFunction({
 }  
 });
 
-const { removeAllTrustedUsers } = require('./functions/trustedUser/removeAllTrustedUsers')
+const { removeAllTrustedRoles } = require('./functions/trustedRole/removeAllTrustedRoles')
 
 bot.functionManager.createFunction({
-  name: '$removeAllTrustedUsers',
+  name: '$removeAllTrustedRoles',
   type: 'djs',
   code: async d => {
     const data = d.util.aoiFunc(d);
 
     const [guildId] = data.inside.splits;
 
-    await removeAllTrustedUsers(db, guildId);
+    await removeAllTrustedRoles(db, guildId);
 
     return {
         code: d.util.setCode(data),
     };
 }  
+});
+
+const { isRoleTrusted } = require('./functions/trustedRole/isRoleTrusted')
+
+bot.functionManager.createFunction({
+  name: '$isRoleTrusted',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [ guildId, roleId ] = data.inside.splits;
+
+    data.result = await isRoleTrusted(db, guildId, roleId);
+
+    return {
+        code: d.util.setCode(data),
+    };
+}
+});
+
+const { isUserTrusted } = require('./functions/trustedRole/isUserTrusted')
+
+bot.functionManager.createFunction({
+  name: '$isUserTrusted',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [ guildId, userId ] = data.inside.splits;
+
+    data.result = await isUserTrusted(d, db, guildId, userId);
+
+    return {
+        code: d.util.setCode(data),
+    };
+}
 });
 
 const { isOpttedIn } = require('./functions/opt/isOpttedIn')

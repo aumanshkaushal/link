@@ -1,21 +1,21 @@
-async function addTrustedUsers(db, guildId, userId) {
+async function addTrustedRole(db, guildId, roleId) {
   let guilds = await db.collection('guild').get()
   let guild = guilds.docs.find(doc => doc.id === guildId)
   if (!guild) {
     await db.collection('guild').doc(guildId).set({
-      trustedUsers: [userId]
+      trustedRoles: [roleId]
     })
     return
   }
   let doc = await db.collection('guild').doc(guildId).get()
   let data = doc.data()
-  let trustedUsers = data.trustedUsers
-  trustedUsers.push(userId)
+  let trustedRoles = data.trustedRoles
+  trustedRoles.push(roleId)
   await db.collection('guild').doc(guildId).update({
-    trustedUsers: trustedUsers
+    trustedRoles: trustedRoles
   }) 
 }
 
 module.exports = {
-    addTrustedUsers
+  addTrustedRole
 }
