@@ -1,10 +1,15 @@
-function getRange(game_id) {
-  const fs = require('fs')
-  const games = JSON.parse(fs.readFileSync('./base/info.json'))
-  if (games[game_id].range[0] === games[game_id].range[1]) {
-    return games[game_id].range[0]
+const { getGames } = require('../base/getGames')
+async function getRange(db, gameId) {
+  let info = await db.collection('info').get()
+  let game = info.docs.find(doc => doc.id === gameId)
+  if (!game) {
+    return 'None'
   }
-  return games[game_id].range.join('-')
+  let data = game.data()
+  if (data.range[0] === data.range[1]) {
+    return data.range[0]
+  }
+  return data.range.join('-')
 }
 
 module.exports = {

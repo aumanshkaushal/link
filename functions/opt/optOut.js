@@ -1,13 +1,13 @@
+const { initializeUser } = require("../initialize/initializeUser")
+
 async function optOut(db, userId) {
   let users = await db.collection('user').get()
   let user = users.docs.find(doc => doc.id === userId)
   if (!user) {
-    await db.collection('user').doc(userId).set({
-      optin: false
-    })
-    return
+    await initializeUser(db, userId)
+    users = await db.collection('user').get()
+    user = users.docs.find(doc => doc.id === userId)
   }
-  let doc = await db.collection('user').doc(userId).get()
   await db.collection('user').doc(userId).update({
     optin: false
   })    

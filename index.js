@@ -110,7 +110,7 @@ bot.functionManager.createFunction({
   code: async d => {
   const data = d.util.aoiFunc(d);
   const [ no_of_players ] = data.inside.splits;
-  data.result = recommendGame(no_of_players);
+  data.result = await recommendGame(db, no_of_players);
   return { 
     code: d.util.setCode(data) 
     }
@@ -145,7 +145,7 @@ bot.functionManager.createFunction({
 
     const [game_id, field] = data.inside.splits;
 
-    data.result = getInfo(game_id, field);
+    data.result = await getInfo(db, game_id, field);
 
     return {
         code: d.util.setCode(data),
@@ -163,7 +163,7 @@ bot.functionManager.createFunction({
 
     const [game_id] = data.inside.splits;
 
-    data.result = getRange(game_id);
+    data.result = await getRange(db, game_id);
 
     return {
         code: d.util.setCode(data),
@@ -330,6 +330,42 @@ bot.functionManager.createFunction({
     const [userId] = data.inside.splits;
 
     await optOut(db, userId);
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { parseEnabledPacks } = require('./functions/base/parseEnabledPacks');
+
+bot.functionManager.createFunction({
+  name: '$parseEnabledPacks',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId] = data.inside.splits;
+
+    data.result = await parseEnabledPacks(db, guildId);
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { parseCustomUrls } = require('./functions/customUrl/parseCustomUrls')
+
+bot.functionManager.createFunction({
+  name: '$parseCustomUrls',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId] = data.inside.splits;
+
+    data.result = await parseCustomUrls(db, guildId);
 
     return {
         code: d.util.setCode(data),

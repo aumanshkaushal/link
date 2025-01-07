@@ -1,7 +1,12 @@
-function getInfo(game_id, field) {
-  const fs = require('fs')
-  const games = JSON.parse(fs.readFileSync('./base/info.json'))
-  return games[game_id][field]
+const { getGames } = require('../base/getGames')
+async function getInfo(db, gameId, field) {
+  let info = await db.collection('info').get()
+  let game = info.docs.find(doc => doc.id === gameId)
+  if (!game) {
+    return 'None'
+  }
+  let data = game.data()
+  return data[field]
 }
 
 module.exports = {

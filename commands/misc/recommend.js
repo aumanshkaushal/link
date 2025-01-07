@@ -23,7 +23,7 @@ $endif
 
 
 
-$onlyIf[$voiceID!=||$slashOption[players]!=;{newEmbed: {color: Red} {description:❌ You must either be in a voice channel **or** specify the number of players in \`players\` field!}}{interaction}{ephemeral}]
+$onlyIf[$voiceID!=||$slashOption[players]!=;{newEmbed: {color: Red} {description:❌ You must either be in an voice channel **or** specify the number of players in \`players\` field!}}{interaction}{ephemeral}]
 
 `
 }]
