@@ -1,10 +1,11 @@
 {
   "dependencies": {
     "@aoijs/aoi.music": "^1.2.4",
-    "aoi.js": "^6.8.5",
+    "aoi.js": "^6.9.0",
     "dotenv": "^16.4.5",
     "firebase": "^10.13.2",
-    "firebase-admin": "^12.6.0"
+    "firebase-admin": "^12.6.0",
+    "micromatch": "^4.0.8"
   },
   "name": "link",
   "version": "1.0.0",

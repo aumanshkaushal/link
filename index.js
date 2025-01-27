@@ -2,7 +2,7 @@ require('dotenv').config();
 const admin = require('firebase-admin');
 const credentials = require('./secret/key.json');
 const aoijs = require("aoi.js");
-const { AoiVoice, PlayerEvents, PluginName, Cacher, Filter } = require("@aoijs/aoi.music");
+const { AoiVoice, PlayerEvents, PluginName, Cacher, Filter, isLiveStreamUrl } = require("@aoijs/aoi.music");
 const bot = new aoijs.AoiClient({
   token: process.env.DiscordToken,
   prefix: ["$getVar[prefix]"],
@@ -366,6 +366,99 @@ bot.functionManager.createFunction({
     const [guildId] = data.inside.splits;
 
     data.result = await parseCustomUrls(db, guildId);
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { isUrl } = require('./functions/customUrl/isUrl')
+
+bot.functionManager.createFunction({
+  name: '$isUrl',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [url] = data.inside.splits;
+
+    data.result = await isUrl(url);
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { allowedUrl } = require('./functions/customUrl/allowedUrl')
+
+bot.functionManager.createFunction({
+  name: '$allowedUrl',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, url] = data.inside.splits;
+
+    data.result = await allowedUrl(db, guildId, url);
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { fixUrl } = require('./functions/customUrl/fixUrl')
+
+bot.functionManager.createFunction({
+  name: '$fixUrl',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [url] = data.inside.splits;
+    let fixed_url = fixUrl(url.addBrackets())
+
+    data.result = fixed_url.addBrackets();
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { sendInvite } = require('./functions/invite/sendInvite')
+const { sendReport } = require('./functions/invite/sendReport')
+
+bot.functionManager.createFunction({
+  name: '$sendGamelink',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [voiceId, hostId, inviteMessage, inviteReportMessage] = data.inside.splits;
+
+    let report = await sendInvite(db, d, voiceId, hostId, inviteMessage)
+    await sendReport(d, hostId, report, inviteReportMessage)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { gameIDFromUrl } = require('./functions/customUrl/gameIDFromUrl')
+
+bot.functionManager.createFunction({
+  name: '$gameIDFromUrl',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, url] = data.inside.splits;
+
+    data.result = await gameIDFromUrl(db, guildId, url)
 
     return {
         code: d.util.setCode(data),
