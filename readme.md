@@ -1,6 +1,6 @@
 <h1 align="center">
   <br>
-  <a href="https://github.com/notashleel/link"><img src="https://github.com/notashleel/link/blob/main/assets/readme_link.jpg?raw=true" alt="Link! Discord Bot"></a>
+  <a href="https://github.com/aumanshkaushal/link"><img src="https://github.com/aumanshkaushal/link/blob/main/assets/readme_link.jpg?raw=true" alt="Link! Discord Bot"></a>
   <br>
   Link!
   <br>
@@ -14,12 +14,12 @@
   <img alt="Discord" src="https://img.shields.io/discord/1291481095086538824?style=flat&logo=discord&logoColor=%23ffffff&logoSize=auto&label=Discord%20Support%20Server&color=%23ffffff">
 
   </a>
-  <a href="https://github.com/notashleel/link">
-  <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/notashleel/link?style=flat&color=ffffff">
+  <a href="https://github.com/aumanshkaushal/link">
+  <img alt="GitHub package.json version" src="https://img.shields.io/github/package-json/v/aumanshkaushal/link?style=flat&color=ffffff">
 
   </a>
-  <a href="https://github.com/notashleel/link">
-  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/notashleel/link?color=ffffff">
+  <a href="https://github.com/aumanshkaushal/link">
+  <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/aumanshkaushal/link?color=ffffff">
 </p>
 
 ## Firestore Flowchart:
