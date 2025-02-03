@@ -7,15 +7,18 @@ code: `
 
 $interactionFollowUp[{newEmbed:
 {field:<#COLON#circle#COLON#1292523984021229648> General Commands#COLON#:
-<:replycontinued:1292516574816763925> </recommend:$getApplicationCommandID[recommend;$guildID]> » Generate a random game from party pack to play with your friends
+<:replycontinued:1292516574816763925> </recommend:$getApplicationCommandID[recommend;global]> » Generate a random game from party pack to play with your friends
 <:replycontinued:1292516574816763925> </gamelink send:$getApplicationCommandID[gamelink;global]> » Send gamelinks to people present in your voice channel
-<:replycontinued:1292516574816763925> </optin:$getApplicationCommandID[optin;$guildID]> » Opt-in and start recieving direct messages from me
-<:reply:1292516585092808817> </optout:$getApplicationCommandID[optout;$guildID]> » Opt-out of recieving direct messages from me}
+<:replycontinued:1292516574816763925> </optin:$getApplicationCommandID[optin;global]> » Opt-in and start recieving direct messages from me
+<:reply:1292516585092808817> </optout:$getApplicationCommandID[optout;global]> » Opt-out of recieving direct messages from me}
 
 {field:<#COLON#circle#COLON#1292523984021229648> Staff Commands#COLON#:
-<:replycontinued:1292516574816763925> </settings:$getApplicationCommandID[settings;$guildID]> » View and modify the settings of the link bot
-<:replycontinued:1292516574816763925> </trusted add:$getApplicationCommandID[trusted;$guildID]> » Add a user to the trusted users list
-<:reply:1292516585092808817> </trusted remove:$getApplicationCommandID[trusted;$guildID]> » Remove a user from the trusted users list}
+<:replycontinued:1292516574816763925> </settings:$getApplicationCommandID[settings;global]> » View and modify the settings of the link bot
+<:replycontinued:1292516574816763925> </trusted add:$getApplicationCommandID[trusted;global]> » Add a user to the trusted users list
+<:replycontinued:1292516574816763925> </trusted remove:$getApplicationCommandID[trusted;global]> » Remove a user from the trusted users list
+<:replycontinued:1292516574816763925> </customlist add:$getApplicationCommandID[customlist;global]> » Add a custom url to the custom URL list!
+<:reply:1292516585092808817> </customlist remove:$getApplicationCommandID[customlist;global]> » Remove a custom url to the custom URL list!
+}
 {color:2a616a}
 }
 {actionRow:
