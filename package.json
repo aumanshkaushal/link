@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/notashleel/link.git"
+    "url": "git+https://github.com/aumanshkaushal/link.git"
   },
   "keywords": [
     "link!",
@@ -27,7 +27,7 @@
   "author": "Aumansh Kaushal (aumanshk@gmail.com)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/notashleel/link/issues"
+    "url": "https://github.com/aumanshkaushal/link/issues"
   },
-  "homepage": "https://github.com/notashleel/link#readme"
+  "homepage": "https://github.com/aumanshkaushal/link#readme"
 }
