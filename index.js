@@ -518,7 +518,6 @@ bot.functionManager.createFunction({
         code: d.util.setCode(data),
     };
 }  
-<<<<<<< HEAD
 });
 
 const { getCustomUrlsCount } = require('./functions/customUrl/getCustomUrlsCount')
@@ -538,6 +537,3 @@ bot.functionManager.createFunction({
     };
 }  
 });
-=======
-});
->>>>>>> 499ec8c1f4ec909c0f09156ef1e93dc041d2054c

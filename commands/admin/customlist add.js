@@ -10,11 +10,8 @@ $addCustomUrl[$guildID;$nonEscape[$slashOption[link]]]
 
 $interactionDefer[true]
 
-<<<<<<< HEAD
 $onlyIf[$getCustomUrlsCount[$guildID]<25;<:exclaim:1294694172447477840> You cannot add more than 25 custom URLs!{interaction}{ephemeral}]
 
-=======
->>>>>>> 499ec8c1f4ec909c0f09156ef1e93dc041d2054c
 $onlyIf[$isUrl[$nonEscape[$slashOption[link]]]==true;<:exclaim:1294694172447477840> You must provide a valid url!{interaction}{ephemeral}]
 
 $onlyIf[$hasPerms[$guildID;$authorID;administrator]==true||$isUserTrusted[$guildID;$authorID]==true;<:exclaim:1294694172447477840> You cannot use this command!
