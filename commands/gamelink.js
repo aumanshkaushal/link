@@ -20,6 +20,8 @@ $let[gameId;$gameIDFromUrl[$guildID;$nonEscape[$slashOption[url]]]]
 
 $interactionDefer[true]
 $onlyIf[$allowedUrl[$guildID;$nonEscape[$slashOption[url]]]==true;{newEmbed: {color: Red} {description:❌ \`$nonEscape[$slashOption[url]]\` is not an allowed link!}}{interaction}{ephemeral}]
+$cooldown[60s;<:exclaim:1294694172447477840> You are on cooldown! Please wait %time% before using this command again!{interaction}{ephemeral}]
+
 $onlyIf[$isUserTrusted[$guildID;$authorID]==false||$hasPerms[$guildID;$authorID;administrator]==false;]
 
 $if[$isUserTrusted[$guildID;$authorID]==true||$hasPerms[$guildID;$authorID;administrator]==true]
