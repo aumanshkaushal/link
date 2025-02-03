@@ -6,7 +6,7 @@ async function sendInvite(db, d, voiceId, hostId, message) {
     let humans = await humansInVoiceChannel(d, voiceId)
     let validatedHumans = await validateHumans(db, humans)
     let userIds = validatedHumans.filter((user) => {
-        return user != hostId
+        return user !== hostId
     })
     let dmsDisabled = await dmManager(d, userIds, message, 5, 1000)
     let optedOut = humans.filter((user) => !validatedHumans.includes(user))

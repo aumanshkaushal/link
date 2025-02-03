@@ -1,5 +1,6 @@
 const { isMatch } = require('./isMatch')
 const { initializeGuild } = require('../initialize/initializeGuild')
+const { getEnabledPacks } = require('../pack/getEnabledPacks')
 
 async function allowedUrl(db, guildId, url) {
   let guilds = await db.collection('guild').get()
@@ -12,7 +13,7 @@ async function allowedUrl(db, guildId, url) {
   let data = guild.data()
   let base_urls = []
   base_urls.push(...data.customUrls)
-  let enabled_packs = data.enabledPacks
+  let enabled_packs = getEnabledPacks(db, guildId)
   let packs = await db.collection('pack').get()
   const gameIdSet = new Set();
   for (let i = 0; i < enabled_packs.length; i++) {

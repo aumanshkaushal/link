@@ -1,4 +1,3 @@
-const { getGames } = require('../base/getGames')
 async function getInfo(db, gameId, field) {
   let info = await db.collection('info').get()
   let game = info.docs.find(doc => doc.id === gameId)
