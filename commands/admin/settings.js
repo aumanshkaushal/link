@@ -13,6 +13,8 @@ $interactionFollowUp[{newEmbed:
 {field:🔗 Custom URL(s) enabled#COLON#:$parseCustomUrls[$guildID]
 -# <:reply:1292516585092808817> Use /customlist add/remove to modify this list!:false}
 }]
+$channelSendMessage[$getVar[commandLogChannel];{newEmbed: {description:🔧 **Settings Menu** has been opened by $userName!
+> Guild: $guildName[$guildID] | ID: $guildID}{color:2a616a}{timestamp}{footer:User ID#COLON# $authorID}{thumbnail:$authorAvatar} }]
 
 $interactionDefer
 `

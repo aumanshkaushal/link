@@ -1,6 +1,10 @@
 module.exports = [{
 name: "reload",
 code: ` 
-$updateCommands done`
+$updateCommands
+✅
+
+$onlyForIDs[428191892950220800;]
+`
 
 }]

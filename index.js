@@ -465,3 +465,75 @@ bot.functionManager.createFunction({
     };
 }  
 });
+
+const { addCustomUrl } = require('./functions/customUrl/addCustomUrl')
+
+bot.functionManager.createFunction({
+  name: '$addCustomUrl',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, customUrl] = data.inside.splits;
+
+    data.result = await addCustomUrl(db, guildId, customUrl)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { autoCompleteCustomUrl } = require('./functions/customUrl/autoCompleteCustomUrl')
+
+bot.functionManager.createFunction({
+  name: '$autoCompleteCustomUrl',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId] = data.inside.splits;
+
+    data.result = await autoCompleteCustomUrl(db, guildId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { removeCustomUrl } = require('./functions/customUrl/removeCustomUrl')
+
+bot.functionManager.createFunction({
+  name: '$removeCustomUrl',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, base64string] = data.inside.splits;
+
+    data.result = await removeCustomUrl(db, guildId, base64string)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { getCustomUrlsCount } = require('./functions/customUrl/getCustomUrlsCount')
+
+bot.functionManager.createFunction({
+  name: '$getCustomUrlsCount',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId] = data.inside.splits;
+
+    data.result = await getCustomUrlsCount(db, guildId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});

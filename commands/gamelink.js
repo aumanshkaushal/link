@@ -5,7 +5,14 @@ prototype: "slash",
 $if: "old",
 code: `
 
+
+
 $interactionFollowUp[✅]
+
+$channelSendMessage[1336038265752387584;{newEmbed: {description:$customEmoji[exclaim] $userName has sent a game link!
+> GameLink: $nonEscape[$slashOption[url]]
+> Voice Channel: $channelName[$voiceID] | ID: $voiceID
+> Guild: $guildName[$guildID] | ID: $guildID}{color:2a616a}{timestamp}{footer:User ID#COLON# $authorID}{thumbnail:$authorAvatar} }]
 
 $sendGamelink[$voiceID;$authorID;
 $getInfo[$get[gameId];emoji] <@$authorID> has sent you an **invite** to **$getInfo[$get[gameId];name]** from <#$voiceID>!
@@ -19,12 +26,20 @@ $getInfo[$get[gameId];emoji] <@$authorID> has sent you an **invite** to **$getIn
 $let[gameId;$gameIDFromUrl[$guildID;$nonEscape[$slashOption[url]]]]
 
 $interactionDefer[true]
+$cooldown[60s;<:exclaim:1294694172447477840> You are on cooldown! Please wait %time% before using this command again!{interaction}{ephemeral}]
 $onlyIf[$allowedUrl[$guildID;$nonEscape[$slashOption[url]]]==true;{newEmbed: {color: Red} {description:❌ \`$nonEscape[$slashOption[url]]\` is not an allowed link!}}{interaction}{ephemeral}]
+
+
 $onlyIf[$isUserTrusted[$guildID;$authorID]==false||$hasPerms[$guildID;$authorID;administrator]==false;]
 
 $if[$isUserTrusted[$guildID;$authorID]==true||$hasPerms[$guildID;$authorID;administrator]==true]
 
 $interactionFollowUp[✅]
+
+$channelSendMessage[1336038265752387584;{newEmbed: {description:$customEmoji[exclaim] $userName has sent a game link!
+> GameLink: $nonEscape[$slashOption[url]]
+> Voice Channel: $channelName[$voiceID] | ID: $voiceID
+> Guild: $guildName[$guildID] | ID: $guildID}{color:2a616a}{timestamp}{footer:User ID#COLON# $authorID}{thumbnail:$authorAvatar} }]
 
 $sendGamelink[$voiceID;$authorID;
 $getInfo[$get[gameId];emoji] <@$authorID> has sent you an **invite** to **$getInfo[$get[gameId];name]** from <#$voiceID>!

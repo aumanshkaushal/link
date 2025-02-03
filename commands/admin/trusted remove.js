@@ -16,6 +16,9 @@ $removeTrustedRole[$guildID;$slashOption[role]]
 
 $let[message;<:minus:1294693536998101184> <@&$slashOption[role]> has been removed from the trusted staff list!]
 
+$channelSendMessage[$getVar[commandLogChannel];{newEmbed: {description:<:minus:1294693536998101184> <@&$slashOption[role]> (ID: $slashOption[role] | Name: $roleName[$slashOption[role]]) has been removed from the trusted staff list by $userName!
+> Guild: $guildName[$guildID] | ID: $guildID}{color:2a616a}{timestamp}{footer:User ID#COLON# $authorID}{thumbnail:$authorAvatar} }]
+
 $else
 
 $let[message;<:exclaim:1294694172447477840> That role is not in the trusted staff list!]

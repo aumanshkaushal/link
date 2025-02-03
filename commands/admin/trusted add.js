@@ -16,6 +16,10 @@ $addTrustedRole[$guildID;$slashOption[role]]
 
 $let[message;<:add:1294692912310779935> <@&$slashOption[role]> has been added to the trusted staff list!]
 
+
+$channelSendMessage[$getVar[commandLogChannel];{newEmbed: {description:<:add:1294692912310779935> <@&$slashOption[role]> (ID: $slashOption[role] | Name: $roleName[$slashOption[role]]) has been added to the trusted staff list by $userName!
+> Guild: $guildName[$guildID] | ID: $guildID}{color:2a616a}{timestamp}{footer:User ID#COLON# $authorID}{thumbnail:$authorAvatar} }]
+
 $else
 
 $let[message;<:exclaim:1294694172447477840> That role is already in the trusted staff list!]
