@@ -17,7 +17,7 @@ code: `
 $interactionFollowUp[✅]
 
 $removeCustomUrl[$guildID;$nonEscape[$slashOption[link]]]
-$channelSendMessage[$getVar[commandLogChannel];{newEmbed: {description:<:minus:1294693536998101184> \`$slashOption[link]\` has been removed from the custom url list by $userName!
+$channelSendMessage[$getVar[commandLogChannel];{newEmbed: {description:<:minus:1294693536998101184> \`$base64toString[$nonEscape[$slashOption[link]]]\` has been removed from the custom url list by $userName!
 > Guild: $guildName[$guildID] | ID: $guildID}{color:2a616a}{timestamp}{footer:User ID#COLON# $authorID}{thumbnail:$authorAvatar} }]
 $interactionDefer[true]
 

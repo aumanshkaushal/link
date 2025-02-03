@@ -537,3 +537,21 @@ bot.functionManager.createFunction({
     };
 }  
 });
+
+const { base64toString } = require('./functions/customUrl/base64toString')
+
+bot.functionManager.createFunction({
+  name: '$base64toString',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [string] = data.inside.splits;
+
+    data.result = await base64toString(string)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
