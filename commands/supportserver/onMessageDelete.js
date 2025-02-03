@@ -8,6 +8,7 @@ $channelSendMessage[1336063717250568193; {newEmbed: {description:<@$authorID> ($
 > Message: \`$oldMessage\`} {color: #ff0000} {timestamp} {thumbnail:$userAvatar[$authorID]} }]
 
 $onlyIf[$isBot[$authorID]!=true;]
+$onlyIf[$guildID==1291481095086538824;]
 
 `
 }]
