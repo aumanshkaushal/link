@@ -10,9 +10,14 @@ async function removeGuildPack(db, guildId, packId) {
     }
     let data = guild.data()
     let enabledPacks = data.enabledPacks
-    enabledPacks = enabledPacks.filter(pack => pack !== packId)
+    let packs = await db.collection('pack').get()
+    let pack = packs.docs.find(doc => doc.id === packId)
+    if (!pack) {
+        return 
+    }
+    enabledPacks = enabledPacks.filter(pack => pack !== Number(packId))
     await db.collection('guild').doc(guildId).update({
-        enabledPacks: enabledPacks
+        enabledPacks: enabledPacks.sort()
     })
 }
 

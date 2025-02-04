@@ -17,7 +17,9 @@ $interactionFollowUp[{newEmbed:
 <:replycontinued:1292516574816763925> </trusted add:$getApplicationCommandID[trusted;global]> » Add a user to the trusted users list
 <:replycontinued:1292516574816763925> </trusted remove:$getApplicationCommandID[trusted;global]> » Remove a user from the trusted users list
 <:replycontinued:1292516574816763925> </customlist add:$getApplicationCommandID[customlist;global]> » Add a custom url to the custom URL list!
-<:reply:1292516585092808817> </customlist remove:$getApplicationCommandID[customlist;global]> » Remove a custom url to the custom URL list!
+<:replycontinued:1292516574816763925> </customlist remove:$getApplicationCommandID[customlist;global]> » Remove a custom url from the custom URL list!
+<:replycontinued:1292516574816763925> </pack add:$getApplicationCommandID[pack;global]> » Add a pack to the pack list!
+<:reply:1292516585092808817> </pack remove:$getApplicationCommandID[pack;global]> » Remove a pack from the pack list!
 }
 {color:2a616a}
 }

@@ -555,3 +555,93 @@ bot.functionManager.createFunction({
     };
 }  
 });
+
+const { autoCompleteAvailablePacks } = require('./functions/pack/autoCompleteAvailablePacks')
+
+bot.functionManager.createFunction({
+  name: '$autoCompleteAvailablePacks',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId] = data.inside.splits;
+
+    data.result = await autoCompleteAvailablePacks(db, guildId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { autoCompleteRemovePacks } = require('./functions/pack/autoCompleteRemovePacks')
+
+bot.functionManager.createFunction({
+  name: '$autoCompleteRemovePacks',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId] = data.inside.splits;
+
+    data.result = await autoCompleteRemovePacks(db, guildId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { addGuildPack } = require('./functions/pack/addGuildPack')
+
+bot.functionManager.createFunction({
+  name: '$addGuildPack',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, packId] = data.inside.splits;
+
+    data.result = await addGuildPack(db, guildId, packId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { removeGuildPack } = require('./functions/pack/removeGuildPack')
+
+bot.functionManager.createFunction({
+  name: '$removeGuildPack',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, packId] = data.inside.splits;
+
+    data.result = await removeGuildPack(db, guildId, packId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { nameFromPackId } = require('./functions/pack/nameFromPackId')
+
+bot.functionManager.createFunction({
+  name: '$nameFromPackId',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [packId] = data.inside.splits;
+
+    data.result = await nameFromPackId(db, packId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});

@@ -13,7 +13,7 @@ async function allowedUrl(db, guildId, url) {
   let data = guild.data()
   let base_urls = []
   base_urls.push(...data.customUrls)
-  let enabled_packs = getEnabledPacks(db, guildId)
+  let enabled_packs = await getEnabledPacks(db, guildId)
   let packs = await db.collection('pack').get()
   const gameIdSet = new Set();
   for (let i = 0; i < enabled_packs.length; i++) {
