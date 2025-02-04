@@ -645,3 +645,125 @@ bot.functionManager.createFunction({
     };
 }  
 });
+
+const { isBlockedVC } = require('./functions/blockedVC/isBlockedVC')
+
+bot.functionManager.createFunction({
+  name: '$isBlockedVC',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, voiceId] = data.inside.splits;
+
+    data.result = await isBlockedVC(db, guildId, voiceId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { addBlockedVC } = require('./functions/blockedVC/addBlockedVC')
+
+bot.functionManager.createFunction({
+  name: '$addBlockedVC',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, voiceId] = data.inside.splits;
+
+    await addBlockedVC(db, guildId, voiceId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { removeBlockedVC } = require('./functions/blockedVC/removeBlockedVC')
+
+bot.functionManager.createFunction({
+  name: '$removeBlockedVC',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, voiceId] = data.inside.splits;
+    await removeBlockedVC(db, guildId, voiceId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { getMaxLimit } = require('./functions/blockedVC/getMaxLimit')
+
+bot.functionManager.createFunction({
+  name: '$getMaxLimit',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId] = data.inside.splits;
+
+    data.result = await getMaxLimit(db, guildId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { setMaxLimit } = require('./functions/blockedVC/setMaxLimit')
+
+bot.functionManager.createFunction({
+  name: '$setMaxLimit',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId, maxLimit] = data.inside.splits;
+    await setMaxLimit(db, guildId, maxLimit)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { parseBlockedVCs } = require('./functions/blockedVC/parseBlockedVCs')
+
+bot.functionManager.createFunction({
+  name: '$parseBlockedVCs',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    const [guildId ] = data.inside.splits;
+    data.result = await parseBlockedVCs(db, guildId)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+
+const { getFirebasePing } = require('./functions/getFirebasePing')
+
+bot.functionManager.createFunction({
+  name: '$getFirebasePing',
+  type: 'djs',
+  code: async d => {
+    const data = d.util.aoiFunc(d);
+
+    data.result = await getFirebasePing(db)
+
+    return {
+        code: d.util.setCode(data),
+    };
+}  
+});
+

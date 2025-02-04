@@ -5,7 +5,9 @@ async function initializeGuild(db, guildId) {
     await db.collection('guild').doc(guildId).set({
       trustedRoles: [],
       enabledPacks: [96000, 96001, 96002, 96003],
-      customUrls: []
+      customUrls: [],
+      blockedVCs: [],
+      maxLimit: 15,
     })
   }
 }

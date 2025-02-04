@@ -27,6 +27,8 @@ $let[gameId;$gameIDFromUrl[$guildID;$nonEscape[$slashOption[url]]]]
 
 $interactionDefer[true]
 $cooldown[60s;<:exclaim:1294694172447477840> You are on cooldown! Please wait %time% before using this command again!{interaction}{ephemeral}]
+$onlyIf[$getMaxLimit[$guildID]<=$numberOfUsersInVoiceChannel[$voiceID];{newEmbed: {color: Red} {description:❌ You cannot send gamelinks in voice channels with more than $getMaxLimit[$guildID] people!}}{interaction}{ephemeral}]
+$onlyIf[$isBlockedVC[$guildID;$voiceID]==false;{newEmbed: {color: Red} {description:❌ You cannot send a game link in this voice channel!}}{interaction}{ephemeral}]
 $onlyIf[$allowedUrl[$guildID;$nonEscape[$slashOption[url]]]==true;{newEmbed: {color: Red} {description:❌ \`$nonEscape[$slashOption[url]]\` is not an allowed link!}}{interaction}{ephemeral}]
 
 
