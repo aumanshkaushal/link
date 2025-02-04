@@ -22,6 +22,30 @@
   <img alt="GitHub last commit" src="https://img.shields.io/github/last-commit/aumanshkaushal/link?color=ffffff">
 </p>
 
+## Why Use Link?
+
+- **Secure and Efficient**: Instantly DM every user in a voice channel with a game invite link.
+- **Customizable**: Add and manage custom URLs for your server.
+- **Trusted Roles**: Assign trusted roles to manage who can send invites.
+- **Opt-in/Opt-out**: Users can choose to receive or not receive notifications.
+
+## Basic Overview
+
+### General Commands
+- `/recommend` - Generate a random game from the party pack to play with your friends.
+- `/gamelink send` - Send game links to people present in your voice channel.
+- `/optin` - Opt-in and start receiving direct messages from the bot.
+- `/optout` - Opt-out of receiving direct messages from the bot.
+
+### Staff Commands
+- `/settings` - View and modify the settings of the Link bot.
+- `/trusted add` - Add a user to the trusted users list.
+- `/trusted remove` - Remove a user from the trusted users list.
+- `/customlist add` - Add a custom URL to the custom URL list.
+- `/customlist remove` - Remove a custom URL from the custom URL list.
+
+---
+
 ## Firestore Flowchart:
 
 ```mermaid
@@ -56,6 +80,11 @@ flowchart TD;
     Y --> |Field| A2[customUrls];
     Y --> |Field| A3[enabledPacks];
     Y --> |Field| A4[trustedRoles];
+    Y --> |Field| P1[blockedVCs];
+    P1 --> |Element| P2[Voice_ID_1];
+    P1 --> |Element| P3[Voice_ID_2];
+    P1 --> |Element| P4[Voice_ID_3];
+    Y --> |Field| P5[maxLimit]; 
     A2 --> |Element| A5([customurl1.com/*]);
     A2 --> |Element| A6([customurl2.com/*]);
     A2 --> |Element| A7([customurl3.com/*]);
@@ -70,4 +99,10 @@ flowchart TD;
     E --> |Document| B3([User_ID_3]);
     B1 --> |Field| B4[blacklisted];
     B1 --> |Field| B5[optin];
+    A --> |Collection| B6[bot];
+    B6 --> |Document| B7[health];
+    B7 --> |Field| B8[ping];
 ```
+
+---
+For support and more information, join our [Support Server](https://discord.gg/f85T9H7Wqn).
